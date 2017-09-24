@@ -4,26 +4,27 @@ block content
   #banner.page-header
     .row
       .col-lg-6
-        h2 Amarican Government
+        h2= section.title
     .row 
       .col-xs-12.col-sm-8
         .row.list-group
-          .col-xs-12.list-group-item
-            p
-              span.label-primary 1.
-            h4
-              a(href="/answer") What is the supreme law of the land?
-          .col-xs-12.list-group-item
+          each question in questions
+            .col-xs-12.list-group-item
+              p
+                span.label-primary= question.number
+              h4
+                a(href="/answer")= question.question
+          //.col-xs-12.list-group-item
             p
               span.label-primary 2.
             h4
               a(href="/answer") What does the Constitution do?
-          .col-xs-12.list-group-item
+          //.col-xs-12.list-group-item
             p
               span.label-primary 3.
             h4
               a(href="/answer") The idea of self-government is in the first three words of the Constitution. What are these words?
       .col-xs-12.col-sm-4
-        p.lead A: Principles of American Democracy
+        p.lead= section.subsection
         
         
