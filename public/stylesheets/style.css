@@ -2,20 +2,26 @@ body {
   padding: 50px;
   font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: deepskyblue;
-  color: white;
+  color: darkblue;
 }
 
-a {
+a, .label-primary {
   color: #00B7FF;
+  //color: #e8d069;
 }
 
 .navbar.navbar-default.navbar-fixed-top{
     background-color: dodgerblue;
 }
-a.navbar-brand{
+a.navbar-brand, a{
     font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-h1 {
+h2 {
     font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+.list-group-item, .label-primary{
+    background-color: white;
+}
+.row.page-header{
+    font: 26px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
