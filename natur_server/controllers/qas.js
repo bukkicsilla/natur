@@ -3,9 +3,37 @@ module.exports.questionlist = function(req, res){
   res.render('qlist', { 
       title: '100 Questions' ,
       section: {
-             title:'American Government',
-             subsection: 'A: Principles of American Democracy'
-             },
+             title:'100 Questions for the Test',
+             subsections:[
+                 {
+                 desc: 'Government A: Principles of American Democracy 1 - 12'
+                 },
+                 {
+                 desc: 'Government B: System of Goverment 13 - 47'    
+                 },
+                 {
+                 desc: 'Government C: Right and Responsibilities 48 - 57'     
+                 },
+                 {
+                 desc: 'History A: Colonial Period and Independence 58 - 70'
+                 },
+                 {
+                 desc: 'History B: 1800s 71 - 77'
+                 },
+                 {
+                 desc: 'History C: Recent American History 78 - 87'
+                 },
+                 {
+                 desc: 'Civics A: Geography 88 - 95'
+                 },
+                 {
+                 desc: 'Civics B: Symbols 96 - 98'
+                 },
+                 {
+                 desc: 'Civics C: 99 - 100'
+                 },
+                     ]
+                 },
       questions: [
       {
           number: '1',
@@ -54,6 +82,78 @@ module.exports.questionlist = function(req, res){
     {
         number:'12',
         question: 'What is the “rule of law”?'
+    },
+    {      
+        number: '13',
+        question: 'Name one branch or part of the government.'
+    },
+    {
+        number: '14',
+        question: 'What stops one branch of government from becoming too powerful?'
+    },
+    {
+        number: '15',
+        question: 'Who is in charge of the executive branch?'
+    },
+    {
+        number: '16',
+        question: 'Who makes federal laws?'
+    },
+    {
+        number: '17',
+        question: 'What are the two parts of the U.S. Congress?'
+    },
+    {
+        number: '18',
+        question: 'How many U.S. Senators are there?'
+    },
+    {
+        number: '19',
+        question: 'We elect a U.S. Senator for how many years?'
+    },
+    {
+        number: '20',
+        question: 'Who is one of your state’s U.S. Senators now?'
+    },
+    {
+        number:'21',
+        question: 'The House of Representatives has how many voting members?'
+    },
+    {
+        number:'22',
+        question: 'We elect a U.S. Representative for how many years?'
+    },
+    {      
+        number: '23',
+        question: 'Name your U.S. Representative.'
+    },
+    {
+        number: '24',
+        question: 'Who does a U.S. Senator represent?'
+    },
+    {
+        number: '25',
+        question: 'Why do some states have more Representatives than other states?'
+    },
+    {
+        number: '26',
+        question: 'We elect a President for how many years?'
+    },
+    {
+        number: '27',
+        question: 'In what month do we vote for President?'
+    },
+    {
+        number: '28',
+        question: 'What is the name of the President of the United States now?'
+    },
+    {
+        number: '29',
+        question: 'What is the name of the Vice President of the United States now?'
+    },
+    {
+        number: '30',
+        question: 'If the President can no longer serve, who becomes President?'
     }      
       ]
   });

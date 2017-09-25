@@ -9,7 +9,7 @@ var qas = require('../controllers/qas');
 });*/
 
 var homepageController = function (req, res) {
-   res.render('index', {title: 'Express'})  
+   res.render('index', {title: 'Welcome to Test!'})  
 };
 //router.get('/', homepageController);
 //router.get('/', main.index);
