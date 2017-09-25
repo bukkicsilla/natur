@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+require('./natur_server/models/database');
 
 var index = require('./natur_server/routes/index');
 var users = require('./natur_server/routes/users');

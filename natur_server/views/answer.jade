@@ -3,11 +3,9 @@ extends layout
 block content
   .row.page-header
     .col-lg-12
-      p  What is the supreme law of the land?
+      p= pageHeader.title
   .row
     .col-xs-12.col-md-9
-      p
-        * the Constitution
-      p
-        * the Constitution
+        each answer in answers
+          p= answer.answer
         

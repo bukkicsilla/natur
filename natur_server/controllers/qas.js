@@ -161,5 +161,21 @@ module.exports.questionlist = function(req, res){
 
 /* GET 'Location info' page */
 module.exports.answer = function(req, res){
-  res.render('answer', { title: 'Answer' });
+  res.render('answer', {
+         title: 'Answer',
+            pageHeader: { title: 'First Question' },
+            answers: [
+                {
+                  answer: 'first answer'    
+                },
+                {
+                    answer: 'second answer'
+                },
+                {
+                    answer: 'third answer'
+                }
+            ]
+            
+            
+  });
 };
