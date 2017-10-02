@@ -6,7 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 require('./natur_server/models/database');
 
+// same as next line var routes = require('./app_server/routes/index');
 var index = require('./natur_server/routes/index');
+var routesApi = require('./natur_api/routes/index');
 var users = require('./natur_server/routes/users');
 
 var app = express();
@@ -23,7 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// same as next line app.use('/', routes);
 app.use('/', index);
+app.use('/api', routesApi);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
