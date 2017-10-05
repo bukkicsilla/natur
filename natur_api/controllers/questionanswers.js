@@ -45,7 +45,7 @@ module.exports.showAnswer = function (req, res) {
 };
 //test http://localhost:3000/api/questionanswers/59cd4ffad9642e736bcb93c9
 
-module.exports.questionanswerCreate = function(req, res){
+module.exports.questionanswersCreate = function(req, res){
     //sendJsonResponse(res, 200, {"status" : "success"});
     Qas.create({
         number: req.body.number,
@@ -58,4 +58,31 @@ module.exports.questionanswerCreate = function(req, res){
             sendJsonResponse(res, 201, questionanswer);
         }
     });
+}
+//test 
+//raw data, JSON(application/json) {"answers" : [{"answer":"yes"}, {"answer":"no"}], "number":6, "question":"post"}
+//https://stackoverflow.com/questions/25032483/can-i-send-2-dimension-array-as-parameter-in-postman
+module.exports.questionanswersUpdate = function(req, res){
+    sendJsonResponse(res, 200, {"status" : "success"});
+}
+module.exports.questionanswersDelete = function(req, res){
+    //sendJsonResponse(res, 200, {"status" : "success"});
+    var questionanswerid = req.params.questionanswerid;
+    console.log("id" , questionanswerid);
+    if (questionanswerid){
+        Qas.findByIdAndRemove(questionanswerid)
+           .exec(
+                function(err, questionanswer){
+                    if(err){
+                        sendJsonResponse(res, 404, err);
+                        return;
+                    }
+                    sendJsonResponse(res, 204, null);
+                });
+    
+    } else {
+        sendJsonResponse(res, 404, {
+            "message": "no id"
+        });
+    }
 }
