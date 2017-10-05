@@ -5,7 +5,7 @@ var answerSchema = new mongoose.Schema({
 });
 
 var questionSchema = new mongoose.Schema({
-    number: {type: Number, min: 1, max: 100},
+    number: {type: Number, min: 1, max: 100, required: true},
     question: { type: String, required: true},
     answers: [answerSchema]
 });

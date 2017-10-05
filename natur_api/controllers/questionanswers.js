@@ -44,3 +44,18 @@ module.exports.showAnswer = function (req, res) {
     //sendJsonResponse(res, 200, {"status" : "success"});
 };
 //test http://localhost:3000/api/questionanswers/59cd4ffad9642e736bcb93c9
+
+module.exports.questionanswerCreate = function(req, res){
+    //sendJsonResponse(res, 200, {"status" : "success"});
+    Qas.create({
+        number: req.body.number,
+        question: req.body.question,
+        answers: req.body.answers
+    }, function(err, questionanswer){
+        if(err){
+            sendJsonResponse(res, 400, err);
+        } else {
+            sendJsonResponse(res, 201, questionanswer);
+        }
+    });
+}
