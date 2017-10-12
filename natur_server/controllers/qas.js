@@ -9,6 +9,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 var renderQas = function(req, res, responseBody){
+    var msg;
+    if (!(responseBody instanceof Array)){
+        msg = "api lookup error";
+        responseBody = [];
+    } else {
+        if(!responseBody.length){
+            msg = "no question found";
+        }
+    }
     res.render('qlist', {
         title: '100 Questions',
         section: {
@@ -22,7 +31,8 @@ var renderQas = function(req, res, responseBody){
                  }
                 ]
                  },
-      questions: responseBody
+      questions: responseBody,
+      message: msg
         /*questions: [
       {
           number: '1',
