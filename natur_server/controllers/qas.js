@@ -69,9 +69,61 @@ module.exports.questionlist = function(req, res){
   
 };
 
-/* GET 'Location info' page */
+var renderAnswer = function(req, res, resAns){
+    res.render('answer', {
+         title: 'Answer',
+            pageHeader: { title: resAns.question },
+            answers: resAns.answers
+            /*answers: [
+                {
+                  answer: 'first answer'    
+                },
+                {
+                    answer: 'second answer'
+                },
+                {
+                    answer: 'third answer'
+                }
+            ]*/
+            
+            
+  });
+}
+/* GET 'Answer' page */
 module.exports.answer = function(req, res){
-  res.render('answer', {
+    console.log("start");
+    var requestOps, path;
+    path = "/api/questionanswers/" + req.params.questionanswerid;
+    console.log("path " + path);
+    requestOps = {
+        url: apiOps.server + path,
+        method: "GET",
+        json: {}
+    };
+    request(requestOps, 
+           function(err, response, body){
+            if (response.statusCode === 200){
+               renderAnswer(req, res, body);   
+            } else  {
+                var title, content;
+                if (response.statusCode === 404){
+                    title = "404, page not found";
+                    content = "Try with a different id, page not found.";
+                } else {
+                    title = response.statusCode + ", sorry";
+                    content = "something went wrong";
+                }
+                
+           res.status(response.statusCode);
+           res.render('generic-text', {
+               title: title,
+               content: content
+           });    
+         }//else
+        }
+           );
+    //renderAnswer(req, res);
+  /*res.render('answer', {
          title: 'Answer',
             pageHeader: { title: 'First Question' },
             answers: [
@@ -87,5 +139,5 @@ module.exports.answer = function(req, res){
             ]
             
             
-  });
+  });*/
 };

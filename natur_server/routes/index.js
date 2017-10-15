@@ -14,6 +14,6 @@ var homepageController = function (req, res) {
 //router.get('/', homepageController);
 //router.get('/', main.index);
 router.get('/', qas.questionlist);
-router.get('/answer', qas.answer);
+router.get('/answer/:questionanswerid', qas.answer);
            
 module.exports = router;
