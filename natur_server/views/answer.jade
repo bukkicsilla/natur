@@ -4,8 +4,11 @@ block content
   .row.page-header
     .col-lg-12
       p= pageHeader.title
+      a.btn.btn-info.pull-right(href="/newquestion/") Add Answer
   .row
+    a.btn.btn-warning.pull-right(href="/newquestion") Delete this!!!
     .col-xs-12.col-md-9
         each answer in answers
           p= answer.answer
+        
         

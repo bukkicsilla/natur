@@ -50,7 +50,7 @@ module.exports.questionanswersCreate = function(req, res){
     Qas.create({
         number: req.body.number,
         question: req.body.question,
-        //answers: req.body.answers 
+        answers: req.body.answers 
         //so answers list is empty at creation
         //or only put one answer first
     }, function(err, questionanswer){

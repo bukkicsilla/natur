@@ -17,7 +17,8 @@ router.get('/', qas.questionlist);
 router.get('/answer/:questionanswerid', qas.answer);
 router.get('/newquestion', qas.formquestion);
 router.post('/newquestion', qas.createquestion);
-//router.put('update/:questionanswerid', qas.updateAnswerlist);
+router.get('/answer/:questionanswerid/answers/new',qas. formanswer);
+//router.put('/update/:questionanswerid', qas.updateanswerlist);
 //router.delete('delete/:questionanswerid', qas.deleteQuestion);
            
 module.exports = router;

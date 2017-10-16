@@ -196,17 +196,25 @@ module.exports.createquestion = function(req, res){
     var requestOps, path, postdata;
   
   path = "/api/questionanswers";
+  
+    //console.log("answer ", req.body.answer);
+    /*var ans = [];
+    ans.push(req.body.answers);
+    console.log("answers ", ans);*/
+    
   postdata = {
     question: req.body.question,
     number: parseInt(req.body.number, 10),
-    //answers: req.body.answers
+    //answers: new Array(req.body.answer)
   };
+    //console.log("********** ", postdata.answers);
     requestOps = {
     url : apiOps.server + path,
     method : "POST",
     json : postdata
   };
   if (!postdata.number || !postdata.question) {
+      console.log("empry string");
     res.redirect('/newquestion/');
   } else {
     request(
@@ -224,3 +232,11 @@ module.exports.createquestion = function(req, res){
     );
   }  
 };
+
+module.exports.formanswer = function(req, res){
+    res.render('updatequestion', {
+    title: 'Update Question',
+    pageHeader: { title: 'Update Question'},
+    error: req.query.err
+  });
+}
