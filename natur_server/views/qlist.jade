@@ -5,11 +5,12 @@ block content
     .row
       .col-lg-6
         h2= section.title
+        a.btn.btn-info.pull-right(href="/newquestion") Add Question
     .row 
       .col-xs-12.col-sm-8
         .error= message
         .row.list-group
-          each question in questions
+          each question in questions.reverse()
             .col-xs-12.list-group-item
               p
                 span.label-primary= question.number

@@ -50,7 +50,9 @@ module.exports.questionanswersCreate = function(req, res){
     Qas.create({
         number: req.body.number,
         question: req.body.question,
-        answers: req.body.answers
+        //answers: req.body.answers 
+        //so answers list is empty at creation
+        //or only put one answer first
     }, function(err, questionanswer){
         if(err){
             sendJsonResponse(res, 400, err);
@@ -73,7 +75,7 @@ module.exports.questionanswersUpdate = function(req, res){
         return;
     }
     Qas.findById(req.params.questionanswerid)
-       .select('-number')
+       .select('-number -question')
        .exec(
         function(err, questionanswer){
             if(!questionanswer){
@@ -85,8 +87,10 @@ module.exports.questionanswersUpdate = function(req, res){
                 sendJsonResponse(res, 400, err);
                 return;
             }
-            questionanswer.question = req.body.question;
-            questionanswer.answers = req.body.answers;
+            //questionanswer.question = req.body.question;
+            //questionanswer.answers = req.body.answers;
+            //concatenation of the old list and the new item in list
+            questionanswer.answers = questionanswer.answers.concat(req.body.answers);
             questionanswer.save(function(err,  questionanswer){
                 if (err){
                     sendJsonResponse(res, 404, err);
@@ -119,3 +123,21 @@ module.exports.questionanswersDelete = function(req, res){
         });
     }
 }
+
+
+//get
+//http://localhost:3000/api/questionanswers
+
+//post
+//http://localhost:3000/api/questionanswers
+//{"answers" : [{"answer":"* yes"}, {"answer":"* no"}], "number": 0, "question":"Is it a good test?"}
+//{"answers" : [], "number": 0, "question":"Is it a good test?"}
+
+//update id needed
+//http://localhost:3000/api/questionanswers/59e3f877dd63fc1e00df9867
+//{"answers" : [{"answer":"* Yes"}]}
+//{"answers" : [{"answer":"* No"}]}
+//{"answers" : [{"answer":"* Maybe"}]}
+
+//delete  id needed
+//http://localhost:3000/api/questionanswers/59e3f2576d197e1dcc065863

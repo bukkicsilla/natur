@@ -19,6 +19,25 @@ if (process.env.NODE_ENV === 'production') {
     apiOps.server = "https://glacial-gorge-23966.herokuapp.com";
 }
 
+var _showError = function (req, res, status) {
+  var title, content;
+  if (status === 404) {
+    title = "404, page not found";
+    content = "Oh dear. Looks like we can't find this page. Sorry.";
+  } else if (status === 500) {
+    title = "500, internal server error";
+    content = "How embarrassing. There's a problem with our server.";
+  } else {
+    title = status + ", something's gone wrong";
+    content = "Something, somewhere, has gone just a little bit wrong.";
+  }
+  res.status(status);
+  res.render('generic-text', {
+    title : title,
+    content : content
+  });
+};
+
 var renderQas = function(req, res, responseBody){
     var msg;
     //shuffle(responseBody);
@@ -153,4 +172,55 @@ module.exports.answer = function(req, res){
             
             
   });*/
+};
+
+var renderCreateForm = function (req, res) {
+  res.render('createquestion', {
+    title: 'Create Question',
+    pageHeader: { title: 'Create Question'},
+    error: req.query.err
+  });
+};
+
+module.exports.formquestion = function(req, res){
+  /*res.render('createquestion', {
+        title: '',
+        pageHeader: {
+            title: 'Create Question'
+        }
+    });*/
+    renderCreateForm(req, res);
+}
+
+module.exports.createquestion = function(req, res){
+    var requestOps, path, postdata;
+  
+  path = "/api/questionanswers";
+  postdata = {
+    question: req.body.question,
+    number: parseInt(req.body.number, 10),
+    //answers: req.body.answers
+  };
+    requestOps = {
+    url : apiOps.server + path,
+    method : "POST",
+    json : postdata
+  };
+  if (!postdata.number || !postdata.question) {
+    res.redirect('/newquestion/');
+  } else {
+    request(
+      requestOps,
+      function(err, response, body) {
+        if (response.statusCode === 201) {
+          res.redirect('/');
+        } else if (response.statusCode === 400 && body.question && body.question === "ValidationError" ) {
+          res.redirect('/newquestion/');
+        } else {
+          console.log(body);
+          _showError(req, res, response.statusCode);
+        }
+      }
+    );
+  }  
 };
