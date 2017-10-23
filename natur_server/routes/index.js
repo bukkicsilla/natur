@@ -15,10 +15,14 @@ var homepageController = function (req, res) {
 //router.get('/', main.index);
 router.get('/', qas.questionlist);
 router.get('/answer/:questionanswerid', qas.answer);
+
 router.get('/newquestion', qas.formquestion);
 router.post('/newquestion', qas.createquestion);
-router.get('/answer/:questionanswerid/answers/new',qas. formanswer);
-//router.put('/update/:questionanswerid', qas.updateanswerlist);
-//router.delete('delete/:questionanswerid', qas.deleteQuestion);
-           
+
+router.get('/newanswer/:questionanswerid', qas.formanswer);
+//router.put('/answer/:questionanswerid/new', qas.updateanswerlist);
+
+router.get('/deletequestion/:questionanswerid', qas.deletequestion);
+//router.delete('/questiondelete/:questionanswerid/', qas.deleteqas);
+
 module.exports = router;

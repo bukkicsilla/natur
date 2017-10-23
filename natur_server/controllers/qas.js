@@ -100,12 +100,16 @@ module.exports.questionlist = function(req, res){
     
   
 };
+ 
+/***************************************************************************************************/
 
 var renderAnswer = function(req, res, resAns){
     res.render('answer', {
          title: 'Answer',
             pageHeader: { title: resAns.question },
-            answers: resAns.answers
+            answers: resAns.answers,
+            question: resAns,
+            number: resAns.number
             /*answers: [
                 {
                   answer: 'first answer'    
@@ -126,7 +130,7 @@ module.exports.answer = function(req, res){
     console.log("start");
     var requestOps, path;
     path = "/api/questionanswers/" + req.params.questionanswerid;
-    console.log("path " + path);
+    console.log("path answer " + path);
     requestOps = {
         url: apiOps.server + path,
         method: "GET",
@@ -134,6 +138,7 @@ module.exports.answer = function(req, res){
     };
     request(requestOps, 
            function(err, response, body){
+            console.log("body "+ body.question);
             if (response.statusCode === 200){
                renderAnswer(req, res, body);   
             } else  {
@@ -173,6 +178,8 @@ module.exports.answer = function(req, res){
             
   });*/
 };
+
+/*************************************************************************************************/
 
 var renderCreateForm = function (req, res) {
   res.render('createquestion', {
@@ -233,6 +240,8 @@ module.exports.createquestion = function(req, res){
   }  
 };
 
+/*****************************************************************************************************************/
+
 module.exports.formanswer = function(req, res){
     res.render('updatequestion', {
     title: 'Update Question',
@@ -240,3 +249,49 @@ module.exports.formanswer = function(req, res){
     error: req.query.err
   });
 }
+
+/*******************************************************************************************************************/
+
+
+var deleteqas = function(req, res){
+    console.log("delete question");
+    var requestOps, path;
+    path = "/api/questionanswers/" + req.params.questionanswerid;
+    console.log("path in delete " + path);
+    requestOps = {
+        url: apiOps.server + path,
+        method: "DELETE",
+        json: {}
+    };
+    request(requestOps, 
+           function(err, response, body){
+            //console.log("number " + req.body.number);
+            if (response.statusCode === 204){
+                res.redirect('/');
+            } else  {
+                var title, content;
+                if (response.statusCode === 404){
+                    title = "404, page not found";
+                    content = "Try with a different id, page not found.";
+                } else {
+                    title = response.statusCode + ", sorry";
+                    content = "something went wrong";
+                }
+                
+           res.status(response.statusCode);
+           res.render('generic-text', {
+               title: title,
+               content: content
+           });    
+         }//else
+        }
+           );
+    
+};
+
+module.exports.deletequestion = function(req, res){
+    console.log("delete");
+    deleteqas(req, res );
+    //res.redirect('/');
+    
+};
