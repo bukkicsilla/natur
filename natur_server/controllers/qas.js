@@ -56,10 +56,31 @@ var renderQas = function(req, res, responseBody){
              title:'100 Questions for the Test',
              subsections:[
                  {
-                 desc: 'Government AA: Principles of American Democracy 1 - 12'
+                 desc: 'Government A: --------> Principles of American Democracy 1 - 12'
                  },
                  {
-                 desc: 'Government BB: System of Goverment 13 - 47'    
+                 desc: 'Government B: -----------> System of Goverment 13 - 47'    
+                 },
+                 {
+                 desc: 'Government C: -----------> Rights and Responsibilities 48 - 57'    
+                 },
+                 {
+                 desc: 'American History A: --------> Colonial Period and Independence 58 - 70'    
+                 },
+                 {
+                 desc: 'American History B: --------> 1800s 71 - 77'    
+                 },
+                 {
+                 desc: 'American History C: --------> Recent American History and Other Important Historical Information 78 - 87'    
+                 },
+                 {
+                 desc: 'Integrated Civics A: --------> Geography 88 - 95'    
+                 },
+                 {
+                 desc: 'Integrated Civics B: --------> Symbolds 96 - 98'    
+                 },
+                 {
+                 desc: 'Integrated Civics C: --------> Holidays 99 - 100'    
                  }
                 ]
                  },
