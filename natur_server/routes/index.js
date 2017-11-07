@@ -20,9 +20,9 @@ router.get('/newquestion', qas.formquestion);
 router.post('/newquestion', qas.createquestion);
 
 router.get('/newanswer/:questionanswerid', qas.formanswer);
-//router.put('/answer/:questionanswerid/new', qas.updateanswerlist);
+router.post('/newanswer/:questionanswerid', qas.updateanswerlist);
 
 router.get('/deletequestion/:questionanswerid', qas.deletequestion);
-//router.delete('/questiondelete/:questionanswerid/', qas.deleteqas);
+//router.delete('/deletequestion/:questionanswerid/', qas.deleteqas);
 
 module.exports = router;

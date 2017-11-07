@@ -91,6 +91,7 @@ module.exports.questionanswersUpdate = function(req, res){
             //questionanswer.answers = req.body.answers;
             //concatenation of the old list and the new item in list
             questionanswer.answers = questionanswer.answers.concat(req.body.answers);
+            console.log("API answer " + questionanswer.answers);
             questionanswer.save(function(err,  questionanswer){
                 if (err){
                     sendJsonResponse(res, 404, err);

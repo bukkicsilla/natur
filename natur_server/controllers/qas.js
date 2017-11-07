@@ -233,7 +233,12 @@ module.exports.createquestion = function(req, res){
           res.redirect('/newquestion/');
         } else {
           console.log(body);
-          _showError(req, res, response.statusCode);
+          //_showError(req, res, response.statusCode);
+        res.status(response.statusCode);
+        res.render('generic-text', {
+           title : 'error',
+           content : 'number is positive'
+  });
         }
       }
     );
@@ -242,13 +247,74 @@ module.exports.createquestion = function(req, res){
 
 /*****************************************************************************************************************/
 
-module.exports.formanswer = function(req, res){
+/*module.exports.formanswer = function(req, res){
     res.render('updatequestion', {
     title: 'Update Question',
     pageHeader: { title: 'Update Question'},
     error: req.query.err
   });
+}*/
+
+var renderCreateFormAnswer = function (req, res) {
+  res.render('createanswer', {
+    title: 'Create Answer',
+    pageHeader: { title: 'Create Answer'},
+    error: req.query.err
+  });
+};
+
+module.exports.formanswer = function(req, res){
+  /*res.render('createquestion', {
+        title: '',
+        pageHeader: {
+            title: 'Create Question'
+        }
+    });*/
+    renderCreateFormAnswer(req, res);
 }
+
+module.exports.updateanswerlist = function(req, res){
+    var requestOps, path, questionid, postdata;
+    qasid = req.params.questionanswerid;
+    console.log("id :::" + qasid);
+    
+  path = "/api/questionanswers/" + req.params.questionanswerid;
+  
+  postdata = {
+    //answers: req.body.answer
+    //answers: new Array(req.body.answer)
+      answers: [{"answer": req.body.answer}]
+  };
+    console.log("new answer ", postdata.answers);
+    requestOps = {
+    url : apiOps.server + path,
+    method : "PUT",
+    json : postdata
+  };
+   if (!postdata.answers) {
+      console.log("empry string");
+    res.redirect('/');
+  } else {
+    request(
+      requestOps,
+      function(err, response, body) {
+        if (response.statusCode === 200) {
+          res.redirect('/answer/'+qasid);
+        } else if (response.statusCode === 400 && body.ansers && body.answers === "ValidationError" ) {
+          res.redirect('/newquestion/');
+        } else {
+          console.log(body);
+          //_showError(req, res, response.statusCode);
+        res.status(response.statusCode);
+        res.render('generic-text', {
+           title : 'error',
+           content : 'number is positive'
+  });
+        }
+      }
+    );
+  } //else 
+};
 
 /*******************************************************************************************************************/
 

@@ -4,7 +4,8 @@ block content
   .row.page-header
     .col-lg-12
       p= pageHeader.title
-      a.btn.btn-info.pull-right(href="/newquestion") Add Answer
+      if number > 100
+        a.btn.btn-info.pull-right(href="/newanswer/#{question._id}") Add Answer
   .row
     if number > 100
       a.btn.btn-warning.pull-right(href="/deletequestion/#{question._id}") Delete this!!!
