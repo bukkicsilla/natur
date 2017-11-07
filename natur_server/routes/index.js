@@ -22,6 +22,9 @@ router.post('/newquestion', qas.createquestion);
 router.get('/newanswer/:questionanswerid', qas.formanswer);
 router.post('/newanswer/:questionanswerid', qas.updateanswerlist);
 
+router.get('/replaceanswer/:questionanswerid', qas.formanswerreplace);
+router.post('/replaceanswer/:questionanswerid', qas.replaceanswerlist);
+
 router.get('/deletequestion/:questionanswerid', qas.deletequestion);
 //router.delete('/deletequestion/:questionanswerid/', qas.deleteqas);
 

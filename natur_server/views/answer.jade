@@ -6,6 +6,8 @@ block content
       p= pageHeader.title
       if number > 100
         a.btn.btn-info.pull-right(href="/newanswer/#{question._id}") Add Answer
+      if number > 100    
+        a.btn.btn-danger.pull-right(href="/replaceanswer/#{question._id}") Replace Answers
   .row
     if number > 100
       a.btn.btn-warning.pull-right(href="/deletequestion/#{question._id}") Delete this!!!

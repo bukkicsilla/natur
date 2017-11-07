@@ -236,8 +236,8 @@ module.exports.createquestion = function(req, res){
           //_showError(req, res, response.statusCode);
         res.status(response.statusCode);
         res.render('generic-text', {
-           title : 'error',
-           content : 'number is positive'
+           title : 'You used a wrong number, try again please!',
+           content : 'number is unique and positive'
   });
         }
       }
@@ -289,6 +289,69 @@ module.exports.updateanswerlist = function(req, res){
     requestOps = {
     url : apiOps.server + path,
     method : "PUT",
+    json : postdata
+  };
+   if (!postdata.answers) {
+      console.log("empry string");
+    res.redirect('/');
+  } else {
+    request(
+      requestOps,
+      function(err, response, body) {
+        if (response.statusCode === 200) {
+          res.redirect('/answer/'+qasid);
+        } else if (response.statusCode === 400 && body.ansers && body.answers === "ValidationError" ) {
+          res.redirect('/newquestion/');
+        } else {
+          console.log(body);
+          //_showError(req, res, response.statusCode);
+        res.status(response.statusCode);
+        res.render('generic-text', {
+           title : 'error',
+           content : 'number is positive'
+  });
+        }
+      }
+    );
+  } //else 
+};
+
+
+var renderCreateFormAnswer = function (req, res) {
+  res.render('createanswer', {
+    title: 'Create Answer',
+    pageHeader: { title: 'Create Answer'},
+    error: req.query.err
+  });
+};
+/*************************************************************************/
+
+module.exports.formanswerreplace = function(req, res){
+  /*res.render('createquestion', {
+        title: '',
+        pageHeader: {
+            title: 'Create Question'
+        }
+    });*/
+    renderCreateFormAnswer(req, res);
+}
+
+module.exports.replaceanswerlist = function(req, res){
+    var requestOps, path, questionid, postdata;
+    qasid = req.params.questionanswerid;
+    console.log("id :::" + qasid);
+    
+  path = "/api/questionanswers/" + req.params.questionanswerid;
+  
+  postdata = {
+    //answers: req.body.answer
+    //answers: new Array(req.body.answer)
+      answers: [{"answer": req.body.answer}]
+  };
+    console.log("replace answer ", postdata.answers);
+    requestOps = {
+    url : apiOps.server + path,
+    method : "PATCH",
     json : postdata
   };
    if (!postdata.answers) {

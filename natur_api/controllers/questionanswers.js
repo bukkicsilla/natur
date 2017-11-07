@@ -103,6 +103,44 @@ module.exports.questionanswersUpdate = function(req, res){
         
 )};
 
+module.exports.questionanswersReplace = function(req, res){
+    //sendJsonResponse(res, 200, {"status" : "success"});
+    if(!req.params.questionanswerid){
+        sendJsonResponse(res, 404, {
+            "message": "id not found, it is required!"
+        });
+        return;
+    }
+    Qas.findById(req.params.questionanswerid)
+       .select('-number -question')
+       .exec(
+        function(err, questionanswer){
+            if(!questionanswer){
+                sendJsonResponse(res, 404, {
+                    "message": "qas id is not found"
+                });
+                return;
+            } else if (err) {
+                sendJsonResponse(res, 400, err);
+                return;
+            }
+            //questionanswer.question = req.body.question;
+            //questionanswer.answers = req.body.answers;
+            //concatenation of the old list and the new item in list
+            questionanswer.answers = [];
+            questionanswer.answers = questionanswer.answers.concat(req.body.answers);
+            console.log("API answer " + questionanswer.answers);
+            questionanswer.save(function(err,  questionanswer){
+                if (err){
+                    sendJsonResponse(res, 404, err);
+                } else {
+                    sendJsonResponse(res, 200, questionanswer);
+                }
+            });
+        }
+        
+)};
+
 module.exports.questionanswersDelete = function(req, res){
     //sendJsonResponse(res, 200, {"status" : "success"});
     var questionanswerid = req.params.questionanswerid;
